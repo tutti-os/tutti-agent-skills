@@ -105,7 +105,7 @@ Claude Code 会从仓库根目录发现 marketplace 清单：
 claude plugin marketplace update tutti-agent-skills
 ```
 
-Claude Code 插件也包含一个静默的 `SessionStart` hook，会在后台执行同样的 marketplace update。默认 24 小时最多执行一次。
+Claude Code 插件也包含一个静默的 `SessionStart` hook，路径是 `plugins/tutti/hooks/claude-hooks.json`，会在后台执行同样的 marketplace update。默认 24 小时最多执行一次。
 
 调整 Claude Code hook 检查间隔：
 
@@ -194,8 +194,8 @@ npx --yes skills add ./skills/tutti-agent-workspace-app --skill tutti-agent-work
 │   ├── .claude-plugin/plugin.json
 │   ├── .codex-plugin/plugin.json
 │   ├── assets/icon.png
+│   ├── hooks/claude-hooks.json
 │   ├── hooks/codex-hooks.json
-│   ├── hooks/hooks.json
 │   ├── scripts/auto-update-codex-plugin.sh
 │   ├── scripts/auto-update-claude-plugin.sh
 │   └── skills/

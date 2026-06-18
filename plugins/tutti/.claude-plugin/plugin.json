@@ -1,7 +1,7 @@
 {
   "name": "tutti",
   "displayName": "Tutti",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Tutti workspace app authoring, conversion, and agent app architecture tools.",
   "author": {
     "name": "Tutti",
@@ -12,5 +12,5 @@
   "license": "MIT",
   "keywords": ["tutti", "workspace-apps", "agent-skills"],
   "skills": "./skills/",
-  "hooks": "./hooks/hooks.json"
+  "hooks": "./hooks/claude-hooks.json"
 }
