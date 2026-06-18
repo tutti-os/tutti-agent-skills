@@ -87,6 +87,9 @@ same update from `cron`, `launchd`, or another local automation:
 
 ### Add the Claude Code plugin marketplace
 
+For a first-time install, add the marketplace first, then install the `tutti`
+plugin.
+
 Inside Claude Code:
 
 ```text
@@ -106,6 +109,12 @@ Claude Code discovers the marketplace manifest from the repository root:
 ```text
 .claude-plugin/marketplace.json
 ```
+
+### Update the Claude Code plugin marketplace
+
+Only run `marketplace update` after `tutti-agent-skills` has already been added
+with `marketplace add`. If `claude plugin marketplace list` only shows
+`claude-plugins-official`, add this marketplace first.
 
 To refresh Claude Code's local marketplace cache after this repository changes:
 
