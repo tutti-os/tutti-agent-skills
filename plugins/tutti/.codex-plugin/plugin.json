@@ -1,0 +1,25 @@
+{
+  "name": "tutti",
+  "version": "0.1.0",
+  "description": "Tutti workspace app authoring tools for agent runtimes.",
+  "author": {
+    "name": "Tutti"
+  },
+  "repository": "https://github.com/tutti-os/tutti-agent-skills",
+  "license": "MIT",
+  "keywords": ["tutti", "workspace-apps", "agent-skills"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Tutti",
+    "shortDescription": "Create and repair Tutti workspace apps",
+    "longDescription": "Skills for generating, validating, and repairing self-contained Tutti workspace app packages.",
+    "developerName": "Tutti",
+    "category": "Developer Tools",
+    "capabilities": ["Write"],
+    "defaultPrompt": [
+      "Create a Tutti workspace app package.",
+      "Repair this Tutti workspace app package.",
+      "Validate a Tutti workspace app manifest."
+    ]
+  }
+}

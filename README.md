@@ -3,6 +3,17 @@
 Tutti Agent Skills publishes Tutti workspace app authoring skills as both a
 plugin repository and a skills repository.
 
+## Add The Plugin Marketplace
+
+In Codex, add this repository as a plugin marketplace:
+
+```text
+git@github.com:tutti-os/tutti-agent-skills.git
+```
+
+Leave the sparse path empty so Codex can discover
+`.agents/plugins/marketplace.json` from the repository root.
+
 ## Install All Tutti Skills
 
 Install every skill published by this repository:
@@ -32,7 +43,9 @@ npx --yes skills add ./skills/tutti-workspace-app-factory --skill tutti-workspac
 ## Contents
 
 ```text
+.agents/plugins/marketplace.json
 .codex-plugin/plugin.json
+plugins/tutti/
 skills/tutti-workspace-app-factory/
 ```
 
@@ -53,5 +66,6 @@ source and sync it here.
 npx --yes skills add . --list
 npx --yes skills add ./skills/tutti-workspace-app-factory --list
 python3 /Users/wwcome/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py .
+python3 /Users/wwcome/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py ./plugins/tutti
 python3 /Users/wwcome/.codex/skills/.system/skill-creator/scripts/quick_validate.py ./skills/tutti-workspace-app-factory
 ```

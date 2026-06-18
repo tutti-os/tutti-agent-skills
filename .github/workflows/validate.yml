@@ -19,6 +19,35 @@ jobs:
           npx --yes skills add . --list
           npx --yes skills add ./skills/tutti-workspace-app-factory --list
 
+      - name: Validate plugin manifests
+        run: |
+          python3 - <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          marketplace = pathlib.Path(".agents/plugins/marketplace.json")
+          data = json.loads(marketplace.read_text())
+          plugins = data.get("plugins")
+          if not isinstance(plugins, list) or not plugins:
+              sys.exit("marketplace must contain at least one plugin entry")
+          entry = plugins[0]
+          if entry.get("name") != "tutti":
+              sys.exit("marketplace plugin name must be tutti")
+          if entry.get("source", {}).get("path") != "./plugins/tutti":
+              sys.exit("marketplace plugin source path must be ./plugins/tutti")
+          for plugin_root in [pathlib.Path("."), pathlib.Path("plugins/tutti")]:
+              manifest = plugin_root / ".codex-plugin/plugin.json"
+              plugin = json.loads(manifest.read_text())
+              if plugin.get("name") != "tutti":
+                  sys.exit(f"{manifest} plugin name must be tutti")
+              if plugin.get("skills") != "./skills/":
+                  sys.exit(f"{manifest} skills path must be ./skills/")
+              skill = plugin_root / "skills/tutti-workspace-app-factory/SKILL.md"
+              if not skill.exists():
+                  sys.exit(f"{skill} is missing")
+          PY
+
       - name: Validate skill metadata
         run: |
           python3 - <<'PY'

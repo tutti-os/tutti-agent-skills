@@ -12,3 +12,6 @@ rsync -a --delete \
 
 diff -ru "$TMP_DIR/skills/tutti-workspace-app-factory" \
   "skills/tutti-workspace-app-factory"
+
+diff -ru "$TMP_DIR/skills/tutti-workspace-app-factory" \
+  "plugins/tutti/skills/tutti-workspace-app-factory"
