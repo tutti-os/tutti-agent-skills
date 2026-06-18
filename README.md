@@ -5,7 +5,8 @@
 </p>
 
 [Tutti](https://tutti.sh/) skills and plugin metadata for creating, converting,
-localizing, repairing, and validating self-contained Tutti workspace app packages.
+localizing, repairing, and validating Tutti workspace app packages and
+agent-enabled app repositories.
 
 This repository is a Claude Code plugin marketplace, a Codex plugin marketplace,
 and a Vercel-compatible skills repository. Install it as a plugin when you want
@@ -19,9 +20,8 @@ want command-line skill discovery with `npx skills add`.
 - A `tutti` plugin under `plugins/tutti/`.
 - A root plugin manifest at `.codex-plugin/plugin.json` for direct plugin
   discovery.
-- The `tutti-workspace-app-factory` skill under
-  `skills/tutti-workspace-app-factory/`.
-- Sync helpers for mirroring the skill from the Tutti main repository.
+- Direct-install skills under `skills/`.
+- Sync helpers for mirroring the skills from the Tutti main repository.
 
 ## Quick Start
 
@@ -146,13 +146,20 @@ Install only the workspace app factory skill:
 npx --yes skills add tutti-os/tutti-agent-skills --skill tutti-workspace-app-factory
 ```
 
+Install only the agent workspace app architecture skill:
+
+```bash
+npx --yes skills add tutti-os/tutti-agent-skills --skill tutti-agent-workspace-app
+```
+
 Install from a local checkout during development:
 
 ```bash
 npx --yes skills add ./skills/tutti-workspace-app-factory --skill tutti-workspace-app-factory
+npx --yes skills add ./skills/tutti-agent-workspace-app --skill tutti-agent-workspace-app
 ```
 
-## Skill
+## Skills
 
 ### `tutti-workspace-app-factory`
 
@@ -171,6 +178,20 @@ The skill covers:
 - Tutti-managed runtime environment variables.
 - Static validation script and checklist for generated app packages.
 
+### `tutti-agent-workspace-app`
+
+Builds or evolves a full agent-enabled Tutti app repository. Use it when the
+task needs a maintainable app architecture rather than only a package directory.
+
+The skill covers:
+
+- `apps/web`, `apps/server`, and `packages/shared` monorepo boundaries.
+- `@tutti-os/agent-acp-kit` local Codex/Claude runtime integration.
+- Run-scoped MCP/tool gateway patterns.
+- App-owned `scripts/package-tutti-app.mjs` package builders.
+- Web-first debugging, i18n enforcement, and package smoke validation.
+- Deferring final package contracts back to `tutti-workspace-app-factory`.
+
 ## Repository Layout
 
 ```text
@@ -187,20 +208,24 @@ The skill covers:
 │   ├── hooks/hooks.json
 │   ├── scripts/auto-update-codex-plugin.sh
 │   ├── scripts/auto-update-claude-plugin.sh
-│   └── skills/tutti-workspace-app-factory/
+│   └── skills/
+│       ├── tutti-agent-workspace-app/
+│       └── tutti-workspace-app-factory/
 ├── scripts/
 │   ├── check-tutti-main-sync.sh
 │   ├── pull-from-tutti-main.sh
 │   └── upgrade-codex-marketplace.sh
-└── skills/tutti-workspace-app-factory/
+└── skills/
+    ├── tutti-agent-workspace-app/
+    └── tutti-workspace-app-factory/
 ```
 
 There are two skill copies by design:
 
-- `skills/tutti-workspace-app-factory/` supports direct `npx skills add`
+- `skills/*/` supports direct `npx skills add`
   installs from the repository root.
-- `plugins/tutti/skills/tutti-workspace-app-factory/` is bundled with the Claude
-  Code and Codex `tutti` plugin.
+- `plugins/tutti/skills/*/` is bundled with the Claude Code and Codex `tutti`
+  plugin.
 
 ## Sync Model
 
@@ -208,9 +233,10 @@ During the current rollout, the source of truth is the Tutti main repository:
 
 ```text
 services/tuttid/service/workspace/app_factory_reference/
+services/tuttid/service/workspace/agent_workspace_app_reference/
 ```
 
-This repository mirrors that directory into both public skill locations. Do not
+This repository mirrors those directories into both public skill locations. Do not
 edit mirrored skill content directly unless this repository has intentionally
 become the source of truth.
 
@@ -233,6 +259,7 @@ Run these checks before opening a pull request:
 ```bash
 npx --yes skills add . --list
 npx --yes skills add ./skills/tutti-workspace-app-factory --list
+npx --yes skills add ./skills/tutti-agent-workspace-app --list
 claude plugin validate .
 claude plugin validate ./plugins/tutti
 codex plugin marketplace add .
@@ -244,9 +271,9 @@ frontmatter on pull requests and pushes to `main`.
 
 ## Status
 
-This repository currently publishes one Tutti skill and one Codex plugin. The
-layout is intentionally prepared for adding more Tutti skills later without
-changing the install flow.
+This repository currently publishes two Tutti skills and one `tutti` plugin for
+Claude Code and Codex. Additional Tutti skills can be added under `skills/` and
+`plugins/tutti/skills/` without changing the install flow.
 
 ## License
 

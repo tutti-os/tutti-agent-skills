@@ -1,8 +1,8 @@
 {
   "name": "tutti",
   "displayName": "Tutti",
-  "version": "0.1.4",
-  "description": "Tutti workspace app authoring and conversion tools for agent runtimes.",
+  "version": "0.2.0",
+  "description": "Tutti workspace app authoring, conversion, and agent app architecture tools.",
   "author": {
     "name": "Tutti",
     "url": "https://tutti.sh/"

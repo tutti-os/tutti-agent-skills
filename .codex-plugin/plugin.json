@@ -1,7 +1,7 @@
 {
   "name": "tutti",
-  "version": "0.1.4",
-  "description": "Tutti workspace app authoring and conversion tools for agent runtimes.",
+  "version": "0.2.0",
+  "description": "Tutti workspace app authoring, conversion, and agent app architecture tools.",
   "author": {
     "name": "Tutti"
   },
@@ -11,8 +11,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Tutti",
-    "shortDescription": "Create, convert, and repair Tutti workspace apps",
-    "longDescription": "Skills for generating, converting, validating, localizing, and repairing self-contained Tutti workspace app packages.",
+    "shortDescription": "Create Tutti workspace and agent apps",
+    "longDescription": "Skills for generating, converting, validating, localizing, and repairing self-contained Tutti workspace app packages and agent-enabled app repositories.",
     "developerName": "Tutti",
     "category": "Developer Tools",
     "capabilities": ["Write"],
@@ -22,6 +22,7 @@
     "defaultPrompt": [
       "Create a Tutti workspace app package.",
       "Convert this repository into a Tutti workspace app package.",
+      "Create an agent-enabled Tutti workspace app repository.",
       "Repair this Tutti workspace app package.",
       "Validate a Tutti workspace app manifest."
     ]
