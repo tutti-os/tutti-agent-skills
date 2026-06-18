@@ -16,6 +16,7 @@
     "developerName": "Tutti",
     "category": "Developer Tools",
     "capabilities": ["Write"],
+    "websiteURL": "https://tutti.sh/",
     "composerIcon": "./assets/icon.png",
     "logo": "./assets/icon.png",
     "defaultPrompt": [

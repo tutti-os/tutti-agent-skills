@@ -43,6 +43,8 @@ jobs:
                   sys.exit(f"{manifest} plugin name must be tutti")
               if plugin.get("skills") != "./skills/":
                   sys.exit(f"{manifest} skills path must be ./skills/")
+              if plugin.get("interface", {}).get("websiteURL") != "https://tutti.sh/":
+                  sys.exit(f"{manifest} websiteURL must be https://tutti.sh/")
               for asset_key in ("composerIcon", "logo"):
                   asset_path = plugin.get("interface", {}).get(asset_key)
                   if asset_path != "./assets/icon.png":
