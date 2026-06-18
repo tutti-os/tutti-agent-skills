@@ -1,13 +1,17 @@
 {
   "name": "tutti",
-  "version": "0.2.0",
+  "version": "0.2.0+codex.source-a2c2b4c42ed9",
   "description": "Tutti workspace app authoring, conversion, and agent app architecture tools.",
   "author": {
     "name": "Tutti"
   },
   "repository": "https://github.com/tutti-os/tutti-agent-skills",
   "license": "MIT",
-  "keywords": ["tutti", "workspace-apps", "agent-skills"],
+  "keywords": [
+    "tutti",
+    "workspace-apps",
+    "agent-skills"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Tutti",
@@ -15,7 +19,9 @@
     "longDescription": "Skills for generating, converting, validating, localizing, and repairing self-contained Tutti workspace app packages and agent-enabled app repositories.",
     "developerName": "Tutti",
     "category": "Developer Tools",
-    "capabilities": ["Write"],
+    "capabilities": [
+      "Write"
+    ],
     "websiteURL": "https://tutti.sh/",
     "composerIcon": "./assets/icon.png",
     "logo": "./assets/icon.png",
