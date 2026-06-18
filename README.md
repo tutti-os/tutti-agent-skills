@@ -277,4 +277,4 @@ Claude Code and Codex. Additional Tutti skills can be added under `skills/` and
 
 ## License
 
-MIT. See [LICENSE](./LICENSE).
+Apache License 2.0. See [LICENSE](./LICENSE).
