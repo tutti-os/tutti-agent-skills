@@ -56,10 +56,19 @@ jobs:
               sys.exit("Claude plugin name must be tutti")
           if claude_plugin.get("skills") != "./skills/":
               sys.exit("Claude plugin skills path must be ./skills/")
+          if claude_plugin.get("hooks") != "./hooks/hooks.json":
+              sys.exit("Claude plugin hooks path must be ./hooks/hooks.json")
           if claude_plugin.get("homepage") != "https://tutti.sh/":
               sys.exit("Claude plugin homepage must be https://tutti.sh/")
           if not pathlib.Path("plugins/tutti/skills/tutti-workspace-app-factory/SKILL.md").exists():
               sys.exit("Claude plugin bundled skill is missing")
+          hooks = pathlib.Path("plugins/tutti/hooks/hooks.json")
+          hooks_data = json.loads(hooks.read_text())
+          if "SessionStart" not in hooks_data.get("hooks", {}):
+              sys.exit("Claude plugin must declare a SessionStart hook")
+          update_script = pathlib.Path("plugins/tutti/scripts/auto-update-claude-plugin.sh")
+          if not update_script.exists():
+              sys.exit("Claude plugin auto-update script is missing")
 
           for plugin_root in [pathlib.Path("."), pathlib.Path("plugins/tutti")]:
               manifest = plugin_root / ".codex-plugin/plugin.json"

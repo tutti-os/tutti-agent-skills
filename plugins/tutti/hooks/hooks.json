@@ -1,0 +1,16 @@
+{
+  "description": "Keep the Tutti Claude Code plugin marketplace fresh between sessions.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/auto-update-claude-plugin.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
