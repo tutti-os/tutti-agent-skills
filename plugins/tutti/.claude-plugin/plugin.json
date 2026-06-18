@@ -1,7 +1,7 @@
 {
   "name": "tutti",
   "displayName": "Tutti",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tutti workspace app authoring tools for agent runtimes.",
   "author": {
     "name": "Tutti",

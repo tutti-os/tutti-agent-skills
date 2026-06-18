@@ -94,13 +94,29 @@ marketplace UI.
 
 ### Update the Codex plugin marketplace
 
-Codex marketplace entries are cached locally. Unlike the Claude Code plugin,
-Codex does not currently expose a plugin lifecycle hook here, so updates are
-explicit. To pull the latest version of this marketplace after the GitHub
-repository changes, run:
+Codex marketplace entries are cached locally. To pull the latest version of this
+marketplace after the GitHub repository changes, run:
 
 ```bash
 codex plugin marketplace upgrade tutti-agent-skills
+```
+
+The Codex plugin also bundles a `SessionStart` hook at
+`plugins/tutti/hooks/codex-hooks.json`. After installing or enabling the plugin,
+open `/hooks`, review the Tutti hook, and trust it if you want Codex to check for
+marketplace updates automatically between sessions. The hook is throttled to once
+every 24 hours by default.
+
+Tune the Codex hook interval with:
+
+```bash
+TUTTI_AGENT_SKILLS_CODEX_UPDATE_INTERVAL_SECONDS=0
+```
+
+Disable the Codex hook-driven update entirely with:
+
+```bash
+TUTTI_AGENT_SKILLS_CODEX_AUTO_UPDATE=0
 ```
 
 This repository also includes a wrapper script for teams that want to call the
@@ -164,7 +180,9 @@ The skill covers:
 │   ├── .claude-plugin/plugin.json
 │   ├── .codex-plugin/plugin.json
 │   ├── assets/icon.png
+│   ├── hooks/codex-hooks.json
 │   ├── hooks/hooks.json
+│   ├── scripts/auto-update-codex-plugin.sh
 │   ├── scripts/auto-update-claude-plugin.sh
 │   └── skills/tutti-workspace-app-factory/
 ├── scripts/

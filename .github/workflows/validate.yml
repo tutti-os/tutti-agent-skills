@@ -77,6 +77,18 @@ jobs:
                   sys.exit(f"{manifest} plugin name must be tutti")
               if plugin.get("skills") != "./skills/":
                   sys.exit(f"{manifest} skills path must be ./skills/")
+              if plugin_root == pathlib.Path("plugins/tutti"):
+                  if plugin.get("hooks") != "./hooks/codex-hooks.json":
+                      sys.exit("Codex plugin hooks path must be ./hooks/codex-hooks.json")
+                  codex_hooks = plugin_root / "hooks/codex-hooks.json"
+                  if not codex_hooks.exists():
+                      sys.exit("Codex plugin hooks file is missing")
+                  codex_hooks_data = json.loads(codex_hooks.read_text())
+                  if "SessionStart" not in codex_hooks_data.get("hooks", {}):
+                      sys.exit("Codex plugin must declare a SessionStart hook")
+                  codex_update_script = plugin_root / "scripts/auto-update-codex-plugin.sh"
+                  if not codex_update_script.exists():
+                      sys.exit("Codex plugin auto-update script is missing")
               if plugin.get("interface", {}).get("websiteURL") != "https://tutti.sh/":
                   sys.exit(f"{manifest} websiteURL must be https://tutti.sh/")
               for asset_key in ("composerIcon", "logo"):
