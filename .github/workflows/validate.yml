@@ -36,6 +36,31 @@ jobs:
               sys.exit("marketplace plugin name must be tutti")
           if entry.get("source", {}).get("path") != "./plugins/tutti":
               sys.exit("marketplace plugin source path must be ./plugins/tutti")
+
+          claude_marketplace = pathlib.Path(".claude-plugin/marketplace.json")
+          claude_data = json.loads(claude_marketplace.read_text())
+          if claude_data.get("name") != "tutti-agent-skills":
+              sys.exit("Claude marketplace name must be tutti-agent-skills")
+          claude_plugins = claude_data.get("plugins")
+          if not isinstance(claude_plugins, list) or not claude_plugins:
+              sys.exit("Claude marketplace must contain at least one plugin entry")
+          claude_entry = claude_plugins[0]
+          if claude_entry.get("name") != "tutti":
+              sys.exit("Claude marketplace plugin name must be tutti")
+          if claude_entry.get("source") != "./plugins/tutti":
+              sys.exit("Claude marketplace plugin source must be ./plugins/tutti")
+
+          claude_manifest = pathlib.Path("plugins/tutti/.claude-plugin/plugin.json")
+          claude_plugin = json.loads(claude_manifest.read_text())
+          if claude_plugin.get("name") != "tutti":
+              sys.exit("Claude plugin name must be tutti")
+          if claude_plugin.get("skills") != "./skills/":
+              sys.exit("Claude plugin skills path must be ./skills/")
+          if claude_plugin.get("homepage") != "https://tutti.sh/":
+              sys.exit("Claude plugin homepage must be https://tutti.sh/")
+          if not pathlib.Path("plugins/tutti/skills/tutti-workspace-app-factory/SKILL.md").exists():
+              sys.exit("Claude plugin bundled skill is missing")
+
           for plugin_root in [pathlib.Path("."), pathlib.Path("plugins/tutti")]:
               manifest = plugin_root / ".codex-plugin/plugin.json"
               plugin = json.loads(manifest.read_text())

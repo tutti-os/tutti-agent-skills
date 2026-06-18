@@ -7,15 +7,16 @@
 [Tutti](https://tutti.sh/) skills and plugin metadata for creating, repairing,
 and validating self-contained Tutti workspace app packages.
 
-This repository is both a Codex plugin marketplace and a Vercel-compatible
-skills repository. Install it as a plugin when you want the Codex app experience,
-or install the skills directly when you want command-line skill discovery with
-`npx skills add`.
+This repository is a Claude Code plugin marketplace, a Codex plugin marketplace,
+and a Vercel-compatible skills repository. Install it as a plugin when you want
+the Claude Code or Codex app experience, or install the skills directly when you
+want command-line skill discovery with `npx skills add`.
 
 ## What Is Included
 
+- A Claude Code marketplace definition at `.claude-plugin/marketplace.json`.
 - A Codex marketplace definition at `.agents/plugins/marketplace.json`.
-- A `tutti` Codex plugin under `plugins/tutti/`.
+- A `tutti` plugin under `plugins/tutti/`.
 - A root plugin manifest at `.codex-plugin/plugin.json` for direct plugin
   discovery.
 - The `tutti-workspace-app-factory` skill under
@@ -23,6 +24,34 @@ or install the skills directly when you want command-line skill discovery with
 - Sync helpers for mirroring the skill from the Tutti main repository.
 
 ## Quick Start
+
+### Add the Claude Code plugin marketplace
+
+Inside Claude Code:
+
+```text
+/plugin marketplace add tutti-os/tutti-agent-skills
+/plugin install tutti@tutti-agent-skills
+```
+
+From the command line:
+
+```bash
+claude plugin marketplace add tutti-os/tutti-agent-skills
+claude plugin install tutti@tutti-agent-skills
+```
+
+Claude Code discovers the marketplace manifest from the repository root:
+
+```text
+.claude-plugin/marketplace.json
+```
+
+To refresh Claude Code's local marketplace cache after this repository changes:
+
+```bash
+claude plugin marketplace update tutti-agent-skills
+```
 
 ### Add the Codex plugin marketplace
 
@@ -111,9 +140,11 @@ The skill covers:
 ```text
 .
 ├── .agents/plugins/marketplace.json
+├── .claude-plugin/marketplace.json
 ├── .codex-plugin/plugin.json
 ├── assets/icon.png
 ├── plugins/tutti/
+│   ├── .claude-plugin/plugin.json
 │   ├── .codex-plugin/plugin.json
 │   ├── assets/icon.png
 │   └── skills/tutti-workspace-app-factory/
@@ -128,8 +159,8 @@ There are two skill copies by design:
 
 - `skills/tutti-workspace-app-factory/` supports direct `npx skills add`
   installs from the repository root.
-- `plugins/tutti/skills/tutti-workspace-app-factory/` is bundled with the Codex
-  `tutti` plugin.
+- `plugins/tutti/skills/tutti-workspace-app-factory/` is bundled with the Claude
+  Code and Codex `tutti` plugin.
 
 ## Sync Model
 
@@ -162,12 +193,14 @@ Run these checks before opening a pull request:
 ```bash
 npx --yes skills add . --list
 npx --yes skills add ./skills/tutti-workspace-app-factory --list
+claude plugin validate .
+claude plugin validate ./plugins/tutti
 codex plugin marketplace add .
 ```
 
 GitHub Actions also validates skill discovery, plugin manifests, marketplace
-layout, icon paths, website metadata, and skill frontmatter on pull requests and
-pushes to `main`.
+layout, Claude Code marketplace metadata, icon paths, website metadata, and skill
+frontmatter on pull requests and pushes to `main`.
 
 ## Status
 

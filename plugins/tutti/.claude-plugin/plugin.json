@@ -1,0 +1,15 @@
+{
+  "name": "tutti",
+  "displayName": "Tutti",
+  "version": "0.1.0",
+  "description": "Tutti workspace app authoring tools for agent runtimes.",
+  "author": {
+    "name": "Tutti",
+    "url": "https://tutti.sh/"
+  },
+  "homepage": "https://tutti.sh/",
+  "repository": "https://github.com/tutti-os/tutti-agent-skills",
+  "license": "MIT",
+  "keywords": ["tutti", "workspace-apps", "agent-skills"],
+  "skills": "./skills/"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "tutti-agent-skills",
+  "description": "Tutti workspace app authoring skills and plugins.",
+  "owner": {
+    "name": "Tutti",
+    "url": "https://tutti.sh/"
+  },
+  "plugins": [
+    {
+      "name": "tutti",
+      "displayName": "Tutti",
+      "description": "Create and repair self-contained Tutti workspace app packages.",
+      "source": "./plugins/tutti",
+      "category": "developer-tools",
+      "tags": ["tutti", "workspace-apps", "agent-skills"]
+    }
+  ]
+}
