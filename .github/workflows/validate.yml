@@ -1,0 +1,50 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate skill discovery
+        run: |
+          npx --yes skills add . --list
+          npx --yes skills add ./skills/tutti-workspace-app-factory --list
+
+      - name: Validate skill metadata
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          import re
+          import sys
+
+          skill = pathlib.Path("skills/tutti-workspace-app-factory/SKILL.md")
+          text = skill.read_text()
+          if not text.startswith("---\n"):
+              sys.exit("SKILL.md must start with YAML frontmatter")
+          end = text.find("\n---\n", 4)
+          if end < 0:
+              sys.exit("SKILL.md must close YAML frontmatter")
+          frontmatter = text[4:end]
+          if not re.search(r"^name:\s*tutti-workspace-app-factory\s*$", frontmatter, re.M):
+              sys.exit("SKILL.md missing expected name")
+          if not re.search(r"^description:\s*.+", frontmatter, re.M):
+              sys.exit("SKILL.md missing description")
+          allowed = {"name", "description"}
+          keys = {
+              line.split(":", 1)[0].strip()
+              for line in frontmatter.splitlines()
+              if ":" in line and not line.startswith(" ")
+          }
+          extra = keys - allowed
+          if extra:
+              sys.exit(f"SKILL.md frontmatter has unsupported keys: {sorted(extra)}")
+          PY
