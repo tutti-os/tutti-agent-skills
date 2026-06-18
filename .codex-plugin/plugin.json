@@ -16,6 +16,8 @@
     "developerName": "Tutti",
     "category": "Developer Tools",
     "capabilities": ["Write"],
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
     "defaultPrompt": [
       "Create a Tutti workspace app package.",
       "Repair this Tutti workspace app package.",

@@ -45,6 +45,7 @@ npx --yes skills add ./skills/tutti-workspace-app-factory --skill tutti-workspac
 ```text
 .agents/plugins/marketplace.json
 .codex-plugin/plugin.json
+assets/icon.png
 plugins/tutti/
 skills/tutti-workspace-app-factory/
 ```

@@ -43,6 +43,12 @@ jobs:
                   sys.exit(f"{manifest} plugin name must be tutti")
               if plugin.get("skills") != "./skills/":
                   sys.exit(f"{manifest} skills path must be ./skills/")
+              for asset_key in ("composerIcon", "logo"):
+                  asset_path = plugin.get("interface", {}).get(asset_key)
+                  if asset_path != "./assets/icon.png":
+                      sys.exit(f"{manifest} {asset_key} must be ./assets/icon.png")
+                  if not (plugin_root / "assets/icon.png").exists():
+                      sys.exit(f"{plugin_root / 'assets/icon.png'} is missing")
               skill = plugin_root / "skills/tutti-workspace-app-factory/SKILL.md"
               if not skill.exists():
                   sys.exit(f"{skill} is missing")
