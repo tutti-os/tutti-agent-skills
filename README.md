@@ -4,8 +4,8 @@
   <img src="./assets/icon.png" alt="Tutti" width="96" height="96" />
 </p>
 
-[Tutti](https://tutti.sh/) skills and plugin metadata for creating, repairing,
-and validating self-contained Tutti workspace app packages.
+[Tutti](https://tutti.sh/) skills and plugin metadata for creating, converting,
+repairing, and validating self-contained Tutti workspace app packages.
 
 This repository is a Claude Code plugin marketplace, a Codex plugin marketplace,
 and a Vercel-compatible skills repository. Install it as a plugin when you want
@@ -162,6 +162,7 @@ to be self-contained and runnable by the Tutti custom app runtime.
 The skill covers:
 
 - `tutti.app.json` and optional `tutti.cli.json` manifests.
+- Existing repository conversion into `package/`-scoped Tutti packages.
 - `bootstrap.sh` runtime entrypoints.
 - Package-local `AGENTS.md` guidance.
 - Local HTTP app runtime rules.
