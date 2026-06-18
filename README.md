@@ -4,6 +4,8 @@
   <img src="./assets/icon.png" alt="Tutti" width="96" height="96" />
 </p>
 
+English | [简体中文](./README.zh-CN.md)
+
 [Tutti](https://tutti.sh/) skills and plugin metadata for creating, converting,
 localizing, repairing, and validating Tutti workspace app packages and
 agent-enabled app repositories.
