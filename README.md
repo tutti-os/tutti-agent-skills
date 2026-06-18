@@ -48,6 +48,22 @@ repository root:
 After the marketplace is added, install the `tutti` plugin from the Codex plugin
 marketplace UI.
 
+### Update the Codex plugin marketplace
+
+Codex marketplace entries are cached locally. To pull the latest version of this
+marketplace after the GitHub repository changes, run:
+
+```bash
+codex plugin marketplace upgrade tutti-agent-skills
+```
+
+This repository also includes a wrapper script for teams that want to call the
+same update from `cron`, `launchd`, or another local automation:
+
+```bash
+./scripts/upgrade-codex-marketplace.sh
+```
+
 ### Install the skills directly
 
 Install every skill published by this repository:
@@ -103,7 +119,8 @@ The skill covers:
 │   └── skills/tutti-workspace-app-factory/
 ├── scripts/
 │   ├── check-tutti-main-sync.sh
-│   └── pull-from-tutti-main.sh
+│   ├── pull-from-tutti-main.sh
+│   └── upgrade-codex-marketplace.sh
 └── skills/tutti-workspace-app-factory/
 ```
 
