@@ -25,7 +25,7 @@ npx --yes skills add ./skills/tutti-workspace-app-factory --skill tutti-workspac
 skills/tutti-workspace-app-factory/
 ```
 
-`skills/tutti-workspace-app-factory` is mirrored from the nextop built-in App
+`skills/tutti-workspace-app-factory` is mirrored from the Tutti main built-in App
 Factory skill:
 
 ```text
@@ -33,8 +33,8 @@ services/tuttid/service/workspace/app_factory_reference/
 ```
 
 Do not edit the mirrored skill content directly unless this repository has
-become the source of truth. During the initial rollout, update the nextop source
-and sync it here.
+become the source of truth. During the initial rollout, update the Tutti main
+source and sync it here.
 
 ## Local Validation
 
