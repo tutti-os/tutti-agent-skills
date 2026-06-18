@@ -28,7 +28,9 @@ if [ "$INTERVAL_SECONDS" != "0" ] && [ -f "$STATE_FILE" ]; then
   fi
 fi
 
-codex plugin marketplace upgrade "$MARKETPLACE_NAME" >/dev/null 2>&1 || true
+codex plugin marketplace upgrade "$MARKETPLACE_NAME" >/dev/null 2>&1 ||
+  codex -c 'service_tier="fast"' plugin marketplace upgrade "$MARKETPLACE_NAME" >/dev/null 2>&1 ||
+  true
 
 if [ "$NOW" -gt 0 ]; then
   printf '%s\n' "$NOW" >"$STATE_FILE" 2>/dev/null || true

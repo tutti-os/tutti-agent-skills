@@ -8,4 +8,5 @@ if ! command -v codex >/dev/null 2>&1; then
   exit 1
 fi
 
-codex plugin marketplace upgrade "$MARKETPLACE_NAME"
+codex plugin marketplace upgrade "$MARKETPLACE_NAME" ||
+  codex -c 'service_tier="fast"' plugin marketplace upgrade "$MARKETPLACE_NAME"
