@@ -5,7 +5,13 @@ plugin repository and a skills repository.
 
 ## Add The Plugin Marketplace
 
-In Codex, add this repository as a plugin marketplace:
+From the command line, add this repository as a Codex plugin marketplace:
+
+```bash
+codex plugin marketplace add git@github.com:tutti-os/tutti-agent-skills.git
+```
+
+In the Codex app, use **Add Plugin Marketplace** with this source:
 
 ```text
 git@github.com:tutti-os/tutti-agent-skills.git
@@ -13,6 +19,9 @@ git@github.com:tutti-os/tutti-agent-skills.git
 
 Leave the sparse path empty so Codex can discover
 `.agents/plugins/marketplace.json` from the repository root.
+
+After adding the marketplace, install the `tutti` plugin from the Codex plugin
+marketplace UI.
 
 ## Install All Tutti Skills
 
@@ -66,7 +75,5 @@ source and sync it here.
 ```bash
 npx --yes skills add . --list
 npx --yes skills add ./skills/tutti-workspace-app-factory --list
-python3 /Users/wwcome/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py .
-python3 /Users/wwcome/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py ./plugins/tutti
-python3 /Users/wwcome/.codex/skills/.system/skill-creator/scripts/quick_validate.py ./skills/tutti-workspace-app-factory
+codex plugin marketplace add .
 ```
