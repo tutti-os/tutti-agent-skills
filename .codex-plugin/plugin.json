@@ -1,6 +1,6 @@
 {
   "name": "tutti",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Tutti workspace app authoring and conversion tools for agent runtimes.",
   "author": {
     "name": "Tutti"
@@ -12,7 +12,7 @@
   "interface": {
     "displayName": "Tutti",
     "shortDescription": "Create, convert, and repair Tutti workspace apps",
-    "longDescription": "Skills for generating, converting, validating, and repairing self-contained Tutti workspace app packages.",
+    "longDescription": "Skills for generating, converting, validating, localizing, and repairing self-contained Tutti workspace app packages.",
     "developerName": "Tutti",
     "category": "Developer Tools",
     "capabilities": ["Write"],
