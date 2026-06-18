@@ -79,6 +79,8 @@ TUTTI_AGENT_SKILLS_CODEX_AUTO_UPDATE=0
 
 ### 添加 Claude Code 插件市场
 
+首次安装时，必须先添加 marketplace，再安装 `tutti` 插件。
+
 在 Claude Code 内执行：
 
 ```text
@@ -98,6 +100,10 @@ Claude Code 会从仓库根目录发现 marketplace 清单：
 ```text
 .claude-plugin/marketplace.json
 ```
+
+### 更新 Claude Code 插件市场
+
+只有已经执行过 `marketplace add` 后，才能执行 `marketplace update`。如果 `claude plugin marketplace list` 里只有 `claude-plugins-official`，需要先添加这个 marketplace。
 
 仓库更新后，刷新 Claude Code 本地 marketplace 缓存：
 
