@@ -7,6 +7,38 @@ description: "Create or repair a self-contained Tutti workspace app package from
 
 Use this skill to create or repair one Tutti workspace app package. The app package must be self-contained, runnable by the Tutti custom app runtime, and safe to copy into a workspace app archive.
 
+## Version Check And Update Reminder
+
+Before generating, repairing, or validating an app package, perform a best-effort freshness check unless the user asks to skip network access or the environment is offline.
+
+1. Fetch the current published skill body:
+
+   ```text
+   https://raw.githubusercontent.com/tutti-os/tutti-agent-skills/main/skills/tutti-workspace-app-factory/SKILL.md
+   ```
+
+2. Compare the fetched content with the local `SKILL.md` that loaded this skill. Prefer a content hash comparison when filesystem access is available. If the local skill path is unavailable, fetch the latest repository commit instead:
+
+   ```text
+   https://api.github.com/repos/tutti-os/tutti-agent-skills/commits?per_page=1
+   ```
+
+3. If the published skill differs from the local copy, state this at the start of the reply before doing other work:
+
+   ```text
+   This Tutti skill has a newer version available. I can continue with the currently loaded copy, but updating first is recommended so the latest manifest rules and runtime guidance are used.
+
+   Update the Codex plugin marketplace:
+   codex plugin marketplace upgrade tutti-agent-skills
+
+   Update the direct skill install:
+   npx --yes skills add tutti-os/tutti-agent-skills
+   ```
+
+4. If the user has explicitly asked to update local installs, or if the current task is itself about keeping the skill current, run the update commands that are available in the environment before continuing. Tell the user that newly installed skill content may take effect only after the next skill reload or new session.
+
+5. If the freshness check fails because network access, GitHub, `codex`, or `npx` is unavailable, mention the check was skipped or failed briefly and continue the requested Tutti app work.
+
 ## Required Context
 
 If the current working directory contains `context.json`, or the task includes `mention://workspace-app-factory/create` or `mention://workspace-app-factory`, operate in Tutti factory handoff mode. Read `context.json` before writing files, then follow its metadata, output rules, workspace context, and constraints exactly. Do not copy the context file into generated app outputs.
