@@ -113,10 +113,10 @@ To refresh Claude Code's local marketplace cache after this repository changes:
 claude plugin marketplace update tutti-agent-skills
 ```
 
-The Claude Code plugin also includes a quiet `SessionStart` hook that runs the
-same marketplace update in the background. It is throttled to once every 24 hours
-by default so new sessions do not hit the network every time. You can tune it
-with:
+The Claude Code plugin also includes a quiet `SessionStart` hook at
+`plugins/tutti/hooks/claude-hooks.json` that runs the same marketplace update in
+the background. It is throttled to once every 24 hours by default so new
+sessions do not hit the network every time. You can tune it with:
 
 ```bash
 TUTTI_AGENT_SKILLS_UPDATE_INTERVAL_SECONDS=0
@@ -206,8 +206,8 @@ The skill covers:
 │   ├── .claude-plugin/plugin.json
 │   ├── .codex-plugin/plugin.json
 │   ├── assets/icon.png
+│   ├── hooks/claude-hooks.json
 │   ├── hooks/codex-hooks.json
-│   ├── hooks/hooks.json
 │   ├── scripts/auto-update-codex-plugin.sh
 │   ├── scripts/auto-update-claude-plugin.sh
 │   └── skills/
