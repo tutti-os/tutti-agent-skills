@@ -3,19 +3,30 @@
 Tutti Agent Skills publishes Tutti workspace app authoring skills as both a
 plugin repository and a skills repository.
 
-## Install The Workspace App Factory Skill
+## Install All Tutti Skills
 
-Install with `npx skills add`:
+Install every skill published by this repository:
 
 ```bash
-npx --yes skills add tutti-os/tutti-agent-skills --skill tutti-workspace-app-factory -a codex -g
+npx --yes skills add tutti-os/tutti-agent-skills
 ```
 
-If root repository discovery is not available in a local checkout, install the
-skill directory directly:
+To inspect the available skills before installing:
 
 ```bash
-npx --yes skills add ./skills/tutti-workspace-app-factory --skill tutti-workspace-app-factory -a codex -g
+npx --yes skills add tutti-os/tutti-agent-skills --list
+```
+
+To install only the workspace app factory skill:
+
+```bash
+npx --yes skills add tutti-os/tutti-agent-skills --skill tutti-workspace-app-factory
+```
+
+For local development, you can also install from a checked-out skill directory:
+
+```bash
+npx --yes skills add ./skills/tutti-workspace-app-factory --skill tutti-workspace-app-factory
 ```
 
 ## Contents
