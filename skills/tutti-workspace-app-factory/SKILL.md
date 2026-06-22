@@ -1,6 +1,6 @@
 ---
 name: tutti-workspace-app-factory
-description: "Create, convert, or repair a self-contained Tutti workspace app package from a user request or existing repository. Use for mention://workspace-app-factory/create handoffs, mention://workspace-app-factory handoffs, standalone Tutti workspace app generation, adapting existing projects into Tutti packages, repair, validation, manifests, bootstrap scripts, package-local AGENTS.md, local HTTP runtimes, healthchecks, app assets, optional app-runtime Tutti CLI integration, and TUTTI_APP_* storage rules."
+description: "Create, convert, or repair a self-contained Tutti workspace app package from a user request or existing repository. Use for mention://workspace-app-factory/create handoffs, mention://workspace-app-factory handoffs, standalone Tutti workspace app generation, adapting existing projects into Tutti packages, repair, validation, manifests, bootstrap scripts, package-local AGENTS.md, local HTTP runtimes, healthchecks, app assets, Tutti CLI surfaces with tutti.cli.json and /tutti/cli/* handlers, app-runtime TUTTI_CLI calls, and TUTTI_APP_* storage rules."
 ---
 
 # Tutti Workspace App Factory
@@ -69,7 +69,8 @@ Read `references/demos/simple-python-static-app/` only when you need a concrete 
 Create or update these files under `output.packageRoot` from the context in handoff mode, or under `package/` in standalone mode:
 
 - `tutti.app.json`: valid JSON manifest matching `references/manifest-contract.md`.
-- `tutti.cli.json`: CLI manifest matching `references/cli-manifest-contract.md`, required when the user asks to connect the app to the Tutti ecosystem; otherwise create it only when `tutti.app.json` declares `cli.manifest`.
+- `tutti.cli.json`: CLI manifest matching `references/cli-manifest-contract.md`, required when the user asks to connect the app to the Tutti ecosystem, expose app capabilities to agents, or make the app callable from other Tutti apps; otherwise create it only when `tutti.app.json` declares `cli.manifest`.
+- `COMMANDS.md`: package-local CLI command documentation, required when `tutti.cli.json` declares `documentation.file` and recommended for more than one command.
 - `bootstrap.sh`: executable shell entrypoint that starts the app server with no arguments.
 - `AGENTS.md`: package-local guidance describing layout, runtime command, endpoints, data storage, and modification rules.
 - `locales/<locale>/manifest.json`: manifest metadata localization files, only when the user asks for localized app metadata.
@@ -87,7 +88,7 @@ If the task supplies exact metadata such as `appId`, version, display name, or d
 - `runtime.healthcheckPath`: `/healthz`
 - `localizationInfo`: omit unless the user asks for localized app metadata; when needed, follow `references/manifest-contract.md` and create each referenced locale file.
 
-If the user asks to connect the app to the Tutti ecosystem, expose at least one app capability through `tutti.cli.json` and declare it from `tutti.app.json`. If the app has no obvious domain command yet, add a small useful command such as `status`, `summary`, or `open-context` so other Tutti apps and agents can discover and call it.
+If the user asks to connect the app to the Tutti ecosystem, expose app capabilities to agents, or make the app callable from other Tutti apps, expose at least one app capability through `tutti.cli.json` and declare it from `tutti.app.json`. If the app has no obvious domain command yet, add a small useful command such as `status`, `summary`, or `open-context` so other Tutti apps and agents can discover and call it.
 
 ## Runtime Rules
 
@@ -128,7 +129,7 @@ When converting an existing repository into a Tutti workspace app package:
 2. Prefer a wrapper package under `package/` that copies or references the smallest runnable subset of the existing project. Do not rewrite the original repository outside `package/` unless the user explicitly asks.
 3. Translate the existing start command into `bootstrap.sh`. If the project needs install or build work, put that in executable `prepare.sh` and keep `bootstrap.sh` launch-only.
 4. Replace hard-coded host, port, data, runtime, and log paths with the Tutti runtime environment variables from `references/runtime-env.md`.
-5. If the user asks to connect the app to the Tutti ecosystem, expose stable app capabilities through `tutti.cli.json`; otherwise, if the project already exposes commands, convert the stable user-facing commands into `tutti.cli.json`.
+5. If the user asks to connect the app to the Tutti ecosystem, expose app capabilities to agents, or make the app callable from other Tutti apps, expose stable app capabilities through `tutti.cli.json`; otherwise, if the project already exposes commands, convert the stable user-facing commands into `tutti.cli.json`.
 6. If the project already has localized metadata or UI copy, preserve it using `localizationInfo` for manifest metadata and the i18n harness from `references/i18n-harness.md` for in-app copy.
 7. Document the adapted layout, original project entrypoints, runtime command, storage ownership, and any unsupported original features in package `AGENTS.md`.
 8. Validate the converted package against `references/validation-checklist.md`.

@@ -57,7 +57,7 @@ Keep install/build work out of `bootstrap.sh`; use `prepare.sh` only when prepar
 
 ## CLI Surface
 
-If the user asks to connect the app to the Tutti ecosystem, the app must expose a `tutti.cli.json` surface and declare it from `tutti.app.json`. Do not skip CLI integration as optional in that case. If the app has no obvious domain action yet, expose a small useful command such as `status`, `summary`, or `open-context` that proves the app is discoverable and callable.
+If the user asks to connect the app to the Tutti ecosystem, expose app capabilities to agents, or make the app callable from other Tutti apps, the app must expose a `tutti.cli.json` surface and declare it from `tutti.app.json`. Do not skip CLI integration as optional in that case. If the app has no obvious domain action yet, expose a small useful command such as `status`, `summary`, or `open-context` that proves the app is discoverable and callable.
 
 If the app exposes `tutti.cli.json`:
 
@@ -68,6 +68,7 @@ If the app exposes `tutti.cli.json`:
 - Handler paths should be deterministic: `/tutti/cli/${command.path.join("/")}`.
 - Route handlers must call shared use-case helpers, not duplicate business logic from `/api/*`.
 - Add `COMMANDS.md` or equivalent documentation when the app has many commands.
+- Mention command paths and output modes in package `AGENTS.md` so future agents can call the app without driving the UI.
 
 ## Validation
 
@@ -78,6 +79,7 @@ Package tests should assert:
 - `tutti.app.json` does not declare `runtime.kind`.
 - CLI manifest exists when declared.
 - CLI command handler paths start with `/tutti/cli/` and match command paths.
+- CLI route smoke tests exercise at least one declared command through the invoke envelope shape.
 - Manifest localization files exist.
 - No symlinks are present.
 - Packaged server starts and `/api/health` or the manifest healthcheck path returns 2xx.

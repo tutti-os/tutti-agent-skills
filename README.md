@@ -7,8 +7,8 @@
 English | [简体中文](./README.zh-CN.md)
 
 [Tutti](https://tutti.sh/) skills and plugin metadata for creating, converting,
-localizing, repairing, and validating Tutti workspace app packages and
-agent-enabled app repositories.
+localizing, repairing, validating, and exposing CLI-callable Tutti workspace app
+packages and agent-enabled app repositories.
 
 This repository is a Codex plugin marketplace, a Claude Code plugin marketplace,
 and a Vercel-compatible skills repository. Install it as a plugin when you want
@@ -23,6 +23,8 @@ want command-line skill discovery with `npx skills add`.
 - A root plugin manifest at `.codex-plugin/plugin.json` for direct plugin
   discovery.
 - Direct-install skills under `skills/`.
+- Tutti CLI surface guidance for `tutti.cli.json` and `/tutti/cli/*` app
+  commands.
 - Sync helpers for mirroring the skills from the Tutti main repository.
 
 ## Quick Start
@@ -181,6 +183,8 @@ runtime.
 The skill covers:
 
 - `tutti.app.json` and optional `tutti.cli.json` manifests.
+- CLI-callable app capabilities through `tutti.cli.json` and `/tutti/cli/*`
+  handlers.
 - Existing repository conversion into `package/`-scoped Tutti packages.
 - I18n harness guidance for manifest metadata and in-app copy parity.
 - `bootstrap.sh` runtime entrypoints.
@@ -199,6 +203,7 @@ The skill covers:
 - `apps/web`, `apps/server`, and `packages/shared` monorepo boundaries.
 - `@tutti-os/agent-acp-kit` local Codex/Claude runtime integration.
 - Run-scoped MCP/tool gateway patterns.
+- Tutti CLI/reference surfaces for external agents and other apps.
 - App-owned `scripts/package-tutti-app.mjs` package builders.
 - Web-first debugging, i18n enforcement, and package smoke validation.
 - Deferring final package contracts back to `tutti-workspace-app-factory`.

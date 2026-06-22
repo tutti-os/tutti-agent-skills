@@ -25,6 +25,16 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if self.path == "/tutti/cli/ping":
+            try:
+                self.read_cli_input()
+            except ValueError as error:
+                self.write_json({
+                    "error": {
+                        "code": "invalid_input",
+                        "message": str(error),
+                    },
+                }, status=400)
+                return
             self.write_json({
                 "kind": "json",
                 "value": {
@@ -35,6 +45,19 @@ class Handler(BaseHTTPRequestHandler):
             return
         self.send_error(404)
 
+    def read_cli_input(self):
+        length = int(self.headers.get("Content-Length", "0") or "0")
+        if length <= 0:
+            return {}
+        body = json.loads(self.rfile.read(length).decode("utf-8"))
+        if isinstance(body, dict) and body.get("schemaVersion") == "tutti.app.cli.invoke.v1":
+            input_value = body.get("input") or {}
+        else:
+            input_value = body
+        if not isinstance(input_value, dict):
+            raise ValueError("CLI input must be an object")
+        return input_value
+
     def serve_file(self, relative_path, content_type):
         data = (PACKAGE_DIR / relative_path).read_bytes()
         self.send_response(200)
@@ -43,9 +66,9 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
-    def write_json(self, payload):
+    def write_json(self, payload, status=200):
         data = json.dumps(payload).encode("utf-8")
-        self.send_response(200)
+        self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(data)))
         self.end_headers()

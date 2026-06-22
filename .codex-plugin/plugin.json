@@ -12,10 +12,10 @@
   "interface": {
     "displayName": "Tutti",
     "shortDescription": "Create Tutti workspace and agent apps",
-    "longDescription": "Skills for generating, converting, validating, localizing, and repairing self-contained Tutti workspace app packages and agent-enabled app repositories.",
+    "longDescription": "Skills for generating, converting, validating, localizing, and repairing self-contained Tutti workspace app packages, CLI-callable app surfaces, and agent-enabled app repositories.",
     "developerName": "Tutti",
     "category": "Developer Tools",
-    "capabilities": ["Write"],
+    "capabilities": ["Write", "CLI surfaces"],
     "websiteURL": "https://tutti.sh/",
     "composerIcon": "./assets/icon.png",
     "logo": "./assets/icon.png",
@@ -23,6 +23,7 @@
       "Create a Tutti workspace app package.",
       "Convert this repository into a Tutti workspace app package.",
       "Create an agent-enabled Tutti workspace app repository.",
+      "Add a Tutti CLI surface to a workspace app package.",
       "Repair this Tutti workspace app package.",
       "Validate a Tutti workspace app manifest."
     ]
