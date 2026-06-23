@@ -3,7 +3,6 @@
 Package layout:
 
 - `tutti.app.json`: app manifest.
-- `tutti.cli.json`: exposes the demo `ping` command.
 - `bootstrap.sh`: launches `server.py`.
 - `server.py`: serves `/healthz`, static HTML, and JSON endpoints.
 - `static/`: browser assets.
@@ -16,7 +15,6 @@ Runtime:
 - Read package assets from `TUTTI_APP_PACKAGE_DIR`.
 - Store durable JSON data in `TUTTI_APP_DATA_DIR`.
 - Use `TUTTI_APP_RUNTIME_DIR` for scratch files and `TUTTI_APP_LOG_DIR` for logs.
-- `POST /tutti/cli/ping` accepts the Tutti CLI invoke envelope and returns a JSON command output.
 
 Local run example:
 
@@ -38,7 +36,6 @@ Endpoints:
 
 - `GET /healthz`: healthcheck.
 - `GET /api/state`: reads durable JSON state from `TUTTI_APP_DATA_DIR`.
-- `POST /tutti/cli/ping`: CLI command handler declared by `tutti.cli.json`.
 
 Modification guidance:
 

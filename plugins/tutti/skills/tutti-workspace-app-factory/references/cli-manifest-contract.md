@@ -58,19 +58,11 @@ Rules:
 - `documentation` is optional. When present, `documentation.file` must be a relative package path to app-owned command documentation, usually `COMMANDS.md`. CLI capabilities expose the resolved absolute documentation path for help output.
 - Handler `kind` must be `http`, `method` must be `POST`, and `path` must start with `/tutti/cli/`.
 - Do not declare host, port, or full URLs; Tutti routes to the app runtime port.
+- Handler `timeoutMs`, when present, must be an integer between `1000` and `600000`.
 - Supported input schema is a small object-only subset: `type`, `properties`, `required`, and property `description`.
 - Property `type` may be `string`, `boolean`, or `integer`.
 - `defaultMode` may be `json` or `table`; table output must declare static columns.
 - Successful handler responses must return the `CliCommandOutput` shape directly. Do not wrap it in an invoke response such as `{"ok":true,"output":...}`.
-
-Command design:
-
-- Prefer stable, user-meaningful capabilities over UI implementation details. Good first commands are `status`, `summary`, `list`, `show`, `search`, `run`, `export`, or `open-context`, depending on the app domain.
-- Expose read-only inspection commands whenever an app has durable state that agents or other apps may need to inspect.
-- Add mutating commands only when the requested workflow needs automation outside the UI; validate required inputs and return precise errors.
-- Keep CLI handlers thin. They should parse the invoke envelope, validate `body.input`, call the same app use-case helpers as HTTP/UI routes, and return `kind: "json"`, `kind: "table"`, or `kind: "text"` directly.
-- Add `documentation.file` and create `COMMANDS.md` when the command set has more than one command, non-obvious inputs, or commands meant for other apps to call.
-- Mention every exposed CLI command and any `$TUTTI_CLI` calls to other apps in package `AGENTS.md`.
 
 Runtime request body:
 

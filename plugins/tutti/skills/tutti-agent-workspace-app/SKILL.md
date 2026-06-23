@@ -1,6 +1,6 @@
 ---
 name: tutti-agent-workspace-app
-description: "Build or evolve a complex agent-enabled Tutti workspace app repository. Use for Tutti apps with web/server/shared monorepos, @tutti-os/agent-acp-kit local agent runtimes, Codex or Claude provider detection, run-scoped MCP tool gateways, app-owned package builders, Tutti CLI/reference surfaces with tutti.cli.json and /tutti/cli/* handlers, web-first debugging, i18n harnesses, and production package validation. For simple package creation or repair, use tutti-workspace-app-factory instead."
+description: "Build or evolve a complex agent-enabled Tutti workspace app repository. Use for Tutti apps with web/server/shared monorepos, @tutti-os/agent-acp-kit local agent runtimes, Codex or Claude provider detection, run-scoped MCP tool gateways, app-owned package builders, Tutti CLI/reference surfaces, web-first debugging, i18n harnesses, and production package validation. For simple package creation or repair, use tutti-workspace-app-factory instead."
 ---
 
 # Tutti Agent Workspace App
@@ -18,7 +18,7 @@ Use this skill for:
 - Apps that need `@tutti-os/agent-acp-kit` for local Codex or Claude runtime execution.
 - App-specific MCP or command gateways that expose domain tools to local agents.
 - Multi-package `pnpm` workspaces with `apps/web`, `apps/server`, and `packages/shared`.
-- App-owned packaging, smoke tests, i18n enforcement, and CLI/reference endpoints that make app capabilities callable by external agents and other Tutti apps.
+- App-owned packaging, smoke tests, i18n enforcement, and CLI/reference endpoints.
 - GitHub Actions release workflows for publishing Tutti app releases and staging/production catalogs.
 
 Use `$tutti-workspace-app-factory` instead for a small standalone package, package repair, or manifest-only validation.
@@ -43,7 +43,7 @@ Also read `$tutti-workspace-app-factory` before changing final package files or 
 4. Build the web UI as the primary development surface. Keep the server as local API/static host and app orchestration layer.
 5. If agents are needed, add `@tutti-os/agent-acp-kit`, provider detection, runtime provider abstraction, event normalization, and a run-scoped tool gateway.
 6. Add package generation only after the local dev app runs. Package the built web assets, bundled server, `tutti.app.json`, optional `tutti.cli.json`, executable `bootstrap.sh`, assets, locales, and package-local `AGENTS.md`.
-7. If the user asks to connect to the Tutti app ecosystem, expose app capabilities to agents, or make the app callable from other Tutti apps, treat ecosystem integration as required: expose app capabilities through `tutti.cli.json`, make the app callable by other Tutti apps and agents, and use `TUTTI_CLI` for any calls to other installed Tutti apps.
+7. If the user asks to connect to the Tutti app ecosystem, treat ecosystem integration as required: expose app capabilities through `tutti.cli.json`, make the app callable by other Tutti apps and agents, and use `TUTTI_CLI` for any calls to other installed Tutti apps.
 8. For GitHub-hosted app repositories that should publish releases, add staging and production release workflows after the package builder is stable.
 9. Verify with the repo's targeted checks first, then package checks.
 
