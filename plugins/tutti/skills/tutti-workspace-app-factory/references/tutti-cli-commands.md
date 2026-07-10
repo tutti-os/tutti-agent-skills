@@ -8,16 +8,28 @@ Do not use `$TUTTI_CLI agent ...`, `$TUTTI_CLI codex ...`, or Agent session poll
 
 ```ts
 import { createDefaultLocalAgentRuntime } from "@tutti-os/agent-acp-kit";
-import {
-  loadTuttiAgentComposerOptions,
-  loadTuttiAgentProviderCatalog
-} from "@tutti-os/agent-acp-kit/tutti";
+import { loadTuttiAgentProviderCatalog } from "@tutti-os/agent-acp-kit/tutti";
 
 const localAgentRuntime = createDefaultLocalAgentRuntime();
-const catalog = await loadTuttiAgentProviderCatalog({ runtime: localAgentRuntime });
+const catalog = await loadTuttiAgentProviderCatalog({
+  runtime: localAgentRuntime
+});
 ```
 
-The facade returns the enabled CLI catalog inside Tutti and automatically returns a standalone runtime catalog when `TUTTI_CLI` is absent. Load composer options lazily with `loadTuttiAgentComposerOptions`. Do not pass `mode`, read app ID/token/API environment, or filter either catalog down to Codex/Claude.
+The facade returns the enabled CLI catalog inside Tutti and automatically returns a standalone runtime catalog when `TUTTI_CLI` is absent. Load composer options lazily for the selected provider:
+
+```ts
+import { loadTuttiAgentComposerOptions } from "@tutti-os/agent-acp-kit/tutti";
+
+export async function loadSelectedProviderOptions(providerId: string) {
+  return loadTuttiAgentComposerOptions({
+    providerId,
+    runtime: localAgentRuntime
+  });
+}
+```
+
+Do not pass `mode`, read app ID/token/API environment, or filter either catalog down to Codex/Claude.
 
 For non-agent app-to-app capability calls, always use the command path from `TUTTI_CLI`. `TUTTI_CLI` is the stable app-runtime contract across development and packaged production.
 

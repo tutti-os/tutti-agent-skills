@@ -90,7 +90,9 @@ const tuttiContext = await loadTuttiAgentSkillContext({
 const systemPrompt = [
   appSystemPrompt,
   tuttiContext.recommendedSystemPrompt?.content
-].filter(Boolean).join("\n\n");
+]
+  .filter(Boolean)
+  .join("\n\n");
 
 for await (const event of localAgentRuntime.run({
   runId,
