@@ -201,10 +201,11 @@ task needs a maintainable app architecture rather than only a package directory.
 The skill covers:
 
 - `apps/web`, `apps/server`, and `packages/shared` monorepo boundaries.
-- `@tutti-os/agent-acp-kit` local Codex/Claude runtime integration.
+- Tutti app-scoped dynamic provider catalogs and `@tutti-os/agent-acp-kit` runtime integration.
 - Run-scoped MCP/tool gateway patterns.
 - Tutti CLI/reference surfaces for external agents and other apps.
 - App-owned `scripts/package-tutti-app.mjs` package builders.
+- Version-gated App Center publishing with explicit `min_tutti_version` declarations.
 - Web-first debugging, i18n enforcement, and package smoke validation.
 - Deferring final package contracts back to `tutti-workspace-app-factory`.
 

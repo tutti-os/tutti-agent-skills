@@ -184,10 +184,11 @@ npx --yes skills add ./skills/tutti-agent-workspace-app --skill tutti-agent-work
 这个 skill 覆盖：
 
 - `apps/web`、`apps/server` 和 `packages/shared` 的 monorepo 边界
-- `@tutti-os/agent-acp-kit` 的本地 Codex/Claude runtime 集成
+- Tutti 应用级动态 provider catalog 与 `@tutti-os/agent-acp-kit` runtime 集成
 - run-scoped MCP/tool gateway 模式
 - 面向外部 agent 和其他 app 的 Tutti CLI/reference surface
 - 应用自带的 `scripts/package-tutti-app.mjs` package builder
+- 通过显式 `min_tutti_version` 声明实现按版本分发的 App Center 发布
 - web-first debugging、i18n 约束和 package smoke validation
 - 最终 package contract 回到 `tutti-workspace-app-factory` 做收口
 
