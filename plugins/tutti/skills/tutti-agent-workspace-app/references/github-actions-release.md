@@ -23,9 +23,11 @@ uses: tutti-os/tutti/.github/workflows/publish-tutti-app-release.yml@main
 
 This reusable workflow builds, publishes, and verifies the app package. It can also create a release tag and publish the App Center catalog.
 
-## Version Compatibility Contract
+## Version compatibility contract
 
-Declare one exact stable SemVer in `min_tutti_version` for every normal release. Choose the earliest Tutti version that supports every host API, runtime behavior, and package contract used by that app build. Use `0.0.0` only when the release supports every Tutti version. When compatibility requirements change, publish a new app version with the correct minimum.
+Declare one exact stable SemVer in `min_tutti_version` for every normal release. Choose the earliest Tutti version that contains every host API and runtime contract used by the app. Use `0.0.0` only when the app requires no minimum Tutti version. Publish a new app version when this minimum changes.
+
+The workspace-app scoped provider APIs first ship in `0.1.19-rc.0`. Production apps that use `references/dynamic-agent-providers.md` require the stable floor `min_tutti_version: "0.1.19"` or later.
 
 ## Production Workflow Template
 
@@ -52,7 +54,7 @@ on:
         type: boolean
         default: true
       catalog_only:
-        description: Whether to skip app release upload and only publish the existing latest release to catalog.
+        description: Whether to refresh this app in the catalog without publishing a new release.
         required: false
         type: boolean
         default: false
@@ -106,7 +108,7 @@ on:
         type: boolean
         default: false
       catalog_only:
-        description: Whether to skip app release upload and only publish the existing latest release to staging catalog.
+        description: Whether to refresh this app in the staging catalog without publishing a new release.
         required: false
         type: boolean
         default: false
@@ -165,9 +167,6 @@ Use repository-level variables for app-specific overrides, migration periods, re
 
 Staging callers must set `TUTTI_APP_RELEASES_STAGING_BASE_URL` explicitly. Do not let staging inherit `TUTTI_APP_RELEASES_BASE_URL`, because that can write production asset URLs into staging release metadata.
 
-Every normal release must set `min_tutti_version` explicitly; there is no
-implicit default.
-
 ## Validation
 
 Before considering the release workflows ready:
@@ -177,5 +176,6 @@ Before considering the release workflows ready:
 - Confirm the app id in `tutti.app.json`, `app_id`, and `release_tag_prefix` are consistent.
 - Confirm the selected runner can build the app package.
 - Confirm the organization or repository variables are visible to the app repository.
-- Confirm a Tutti version below the declared minimum does not select the release, while the declared minimum or a newer version does.
+- When `min_tutti_version` is greater than `0.0.0`, confirm a lower Tutti version does not select the release.
+- Confirm the declared minimum or a newer Tutti version selects the release. For `0.0.0`, also test the oldest supported Tutti version.
 - Run the staging workflow first, then production only after the staging release and optional staging catalog are verified.
