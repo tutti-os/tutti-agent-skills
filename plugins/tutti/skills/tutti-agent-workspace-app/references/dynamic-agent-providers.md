@@ -30,7 +30,7 @@ Only construct a custom plugin list when the app has a documented provider trans
 
 ## Agent catalog
 
-The app server exposes an app-owned endpoint such as `GET /api/agents/providers`. Its implementation calls the SDK facade directly:
+The app server exposes an app-owned endpoint such as `GET /api/agent-targets`. Its implementation calls the SDK facade directly:
 
 ```ts
 import { loadTuttiAgentCatalog } from "@tutti-os/agent-acp-kit/tutti";
@@ -92,7 +92,7 @@ Do not eagerly load composer options for every agent. A failure belongs to the s
 
 ## Persistence and host bridge
 
-Persist the canonical `agentTargetId`. Legacy provider-only state may be used once to select a matching current catalog entry, but the migrated value must be an exact agent id. If several agents share that provider, do not guess; choose through explicit product policy or user input.
+Persist the canonical `agentTargetId`. Legacy provider-only state may be used once to select a matching current catalog entry only when exactly one target in the full current catalog uses that provider. The migrated value must be that exact agent id. For zero or multiple matches, leave the legacy preference unresolved and require an explicit exact Agent Target selection; product defaults must not guess the identity.
 
 When invoking a host feature such as:
 
@@ -104,6 +104,7 @@ window.tuttiExternal?.workspace?.openFeature({
 ```
 
 derive the legacy bridge provider from the selected catalog entry. Do not use that provider value as the app's persisted agent selection.
+Use a provider-only bridge only when exactly one target in the full current catalog uses that provider. If the provider is shared, require an exact-agent host API instead of collapsing several Agent Targets into one launch identity.
 
 ## Model IDs
 
