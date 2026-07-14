@@ -12,7 +12,7 @@ import { loadTuttiAgentCatalog } from "@tutti-os/agent-acp-kit/tutti";
 
 const localAgentRuntime = createDefaultLocalAgentRuntime();
 const catalog = await loadTuttiAgentCatalog({
-  runtime: localAgentRuntime,
+  runtime: localAgentRuntime
 });
 ```
 
@@ -27,7 +27,7 @@ const localAgentRuntime = createDefaultLocalAgentRuntime();
 export async function loadSelectedAgentOptions(agentTargetId: string) {
   return loadTuttiAgentComposerOptions({
     agentTargetId,
-    runtime: localAgentRuntime,
+    runtime: localAgentRuntime
   });
 }
 ```

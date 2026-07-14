@@ -12,9 +12,9 @@ packages and agent-enabled app repositories.
 
 This repository publishes marketplace packaging for Codex and Claude Code as
 well as a Vercel-compatible skills repository. Those are delivery formats, not
-the supported Tutti Agent catalog: the skills require apps to discover current
-Agent Targets and never assume a fixed provider list. Install a marketplace
-plugin for its host experience, or install the skills directly for command-line
+the supported Tutti Agent catalog: the skills require agent-enabled apps to
+discover current Agent Targets and never assume a fixed provider list. Install a
+marketplace plugin for its host experience, or install the skills directly for command-line
 discovery with `npx skills add`.
 
 ## What Is Included

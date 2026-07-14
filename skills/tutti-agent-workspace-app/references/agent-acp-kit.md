@@ -45,7 +45,7 @@ The `@tutti-os/agent-acp-kit/tutti` subpath exposes three auto-detecting server-
 import {
   loadTuttiAgentComposerOptions,
   loadTuttiAgentCatalog,
-  loadTuttiAgentSkillContext,
+  loadTuttiAgentSkillContext
 } from "@tutti-os/agent-acp-kit/tutti";
 ```
 
@@ -77,7 +77,7 @@ Skeleton:
 ```ts
 import {
   createDefaultLocalAgentRuntime,
-  createManagedAgentRunContextFromHeaders,
+  createManagedAgentRunContextFromHeaders
 } from "@tutti-os/agent-acp-kit";
 import { loadTuttiAgentSkillContext } from "@tutti-os/agent-acp-kit/tutti";
 
@@ -85,7 +85,7 @@ const localAgentRuntime = createDefaultLocalAgentRuntime();
 
 const runContext = await createManagedAgentRunContextFromHeaders(req.headers, {
   providerId,
-  runId,
+  runId
 });
 const cwd = runContext?.cwd ?? appLocalRunCwd;
 
@@ -93,12 +93,12 @@ const tuttiContext = await loadTuttiAgentSkillContext({
   agentTargetId,
   agentSessionId: runId,
   cwd,
-  signal,
+  signal
 });
 
 const systemPrompt = [
   appSystemPrompt,
-  tuttiContext.recommendedSystemPrompt?.content,
+  tuttiContext.recommendedSystemPrompt?.content
 ]
   .filter(Boolean)
   .join("\n\n");
@@ -118,7 +118,7 @@ for await (const event of localAgentRuntime.run({
   signal,
   skillManifest: [...appSkills, ...tuttiContext.skillManifest],
   timeoutMs,
-  managedAgentInvocation: runContext?.managedAgentInvocation,
+  managedAgentInvocation: runContext?.managedAgentInvocation
 })) {
   yield adaptLocalAgentEvent(event);
 }
@@ -149,7 +149,7 @@ const tuttiContext = await loadTuttiAgentSkillContext({
   cwd,
   browserUse: browserToolsAreWiredAndAllowed,
   computerUse: computerToolsAreWiredAndAllowed,
-  signal,
+  signal
 });
 ```
 
@@ -201,8 +201,8 @@ export function createAppToolsMcpServerConfig(input: {
     args: [input.packagedMcpPath],
     env: {
       APP_TOOL_GATEWAY_URL: input.gatewayBaseUrl,
-      APP_TOOL_TOKEN: input.gatewayToken,
-    },
+      APP_TOOL_TOKEN: input.gatewayToken
+    }
   };
 }
 ```

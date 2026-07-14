@@ -14,7 +14,7 @@ Tutti CLI owns platform capability and enabled Agent Target visibility
 
 An app must not call workspace-app Agent catalog HTTP routes, build daemon URLs, read an Agent catalog bearer token, pass an app ID to agent discovery, spawn `TUTTI_CLI`, parse CLI JSON, or maintain provider ID mappings. The kit does all of that.
 
-Agent ids are the selection identity and are an open string set. Persist and return the exact `agentTargetId` supplied by the kit; do not reconstruct it from a provider name. `providerId` is derived runtime metadata and may be shared by several agents. Do not define closed agent or provider unions such as `"codex" | "claude-code"`.
+Agent IDs are the selection identity and are an open string set. Persist and return the exact `agentTargetId` supplied by the kit; do not reconstruct it from a provider name. `providerId` is derived runtime metadata and may be shared by several agents. Do not define closed agent or provider unions such as `"codex" | "claude-code"`.
 
 ## Runtime registration
 
@@ -38,7 +38,7 @@ import { localAgentRuntime } from "./local-agent-runtime.js";
 
 export async function getAgentCatalog() {
   return await loadTuttiAgentCatalog({
-    runtime: localAgentRuntime,
+    runtime: localAgentRuntime
   });
 }
 ```
@@ -54,7 +54,7 @@ The app may project the returned browser-safe DTO into product-specific fields, 
 ```ts
 import {
   isTuttiAgentCatalog,
-  type TuttiAgentCatalog,
+  type TuttiAgentCatalog
 } from "@tutti-os/agent-acp-kit/tutti/contracts";
 ```
 
@@ -80,7 +80,7 @@ const composer = await loadTuttiAgentComposerOptions({
   cwd: appLocalCwd,
   locale,
   model,
-  reasoningEffort,
+  reasoningEffort
 });
 ```
 
@@ -99,7 +99,7 @@ When invoking a host feature such as:
 ```ts
 window.tuttiExternal?.workspace?.openFeature({
   feature: "agent-chat",
-  provider: selectedAgent.providerId,
+  provider: selectedAgent.providerId
 });
 ```
 
@@ -107,11 +107,13 @@ derive the legacy bridge provider from the selected catalog entry. Do not use th
 
 ## Model IDs
 
-If an app needs globally unique model IDs, store the canonical provider separately or prefix the provider model:
+If an app needs model IDs that remain unique across Agent Targets, include the selection identity and store the canonical provider separately:
 
 ```ts
-const appModelId = `${providerId}:${providerModelId}`;
+const appModelId = `${agentTargetId}:${providerModelId}`;
 ```
+
+Use `${providerId}:${providerModelId}` only when the product intentionally treats the same provider model from multiple Agent Targets as one shared choice.
 
 Do not infer a provider from a model name or assume a fixed model/provider catalog.
 
