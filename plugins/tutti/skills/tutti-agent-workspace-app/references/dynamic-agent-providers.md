@@ -110,10 +110,10 @@ derive the legacy bridge provider from the selected catalog entry. Do not use th
 If an app needs model IDs that remain unique across Agent Targets, include the selection identity and store the canonical provider separately:
 
 ```ts
-const appModelId = `${agentTargetId}:${providerModelId}`;
+const appModelId = JSON.stringify([agentTargetId, providerModelId]);
 ```
 
-Use `${providerId}:${providerModelId}` only when the product intentionally treats the same provider model from multiple Agent Targets as one shared choice.
+The tuple encoding stays unambiguous even when either open-string component contains punctuation. Use `JSON.stringify([providerId, providerModelId])` only when the product intentionally treats the same provider model from multiple Agent Targets as one shared choice.
 
 Do not infer a provider from a model name or assume a fixed model/provider catalog.
 
