@@ -8,7 +8,7 @@
 
 用于 [Tutti](https://tutti.sh/) 的 skills 与插件元数据，帮助创建、转换、本地化、修复、校验并暴露可通过 CLI 调用的 Tutti workspace app package，以及构建带 agent 能力的 Tutti 应用仓库。
 
-这个仓库同时是 Codex 插件市场、Claude Code 插件市场，以及兼容 `npx skills add` 的 skills 仓库。需要 Codex 或 Claude Code 的插件体验时，优先按插件市场安装；只需要命令行 skill 发现能力时，可以直接安装 `skills/`。
+这个仓库同时提供 Codex、Claude Code 的插件市场打包，以及兼容 `npx skills add` 的 skills 仓库。这些只是 skill 的分发形式，并不限定 Tutti 支持的 Agent catalog；skill 会要求启用了 agent 能力的应用动态发现当前 Agent Targets，不能假设固定 provider 列表。需要对应宿主插件体验时可按插件市场安装；只需要命令行 skill 发现能力时，可以直接安装 `skills/`。
 
 ## 包含内容
 
@@ -184,7 +184,7 @@ npx --yes skills add ./skills/tutti-agent-workspace-app --skill tutti-agent-work
 这个 skill 覆盖：
 
 - `apps/web`、`apps/server` 和 `packages/shared` 的 monorepo 边界
-- `@tutti-os/agent-acp-kit` 的本地 Codex/Claude runtime 集成
+- `@tutti-os/agent-acp-kit` 与当前开放本地 Agent catalog 的集成
 - run-scoped MCP/tool gateway 模式
 - 面向外部 agent 和其他 app 的 Tutti CLI/reference surface
 - 应用自带的 `scripts/package-tutti-app.mjs` package builder

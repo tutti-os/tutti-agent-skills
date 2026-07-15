@@ -10,10 +10,12 @@ English | [简体中文](./README.zh-CN.md)
 localizing, repairing, validating, and exposing CLI-callable Tutti workspace app
 packages and agent-enabled app repositories.
 
-This repository is a Codex plugin marketplace, a Claude Code plugin marketplace,
-and a Vercel-compatible skills repository. Install it as a plugin when you want
-the Codex or Claude Code app experience, or install the skills directly when you
-want command-line skill discovery with `npx skills add`.
+This repository publishes marketplace packaging for Codex and Claude Code as
+well as a Vercel-compatible skills repository. Those are delivery formats, not
+the supported Tutti Agent catalog: the skills require agent-enabled apps to
+discover current Agent Targets and never assume a fixed provider list. Install a
+marketplace plugin for its host experience, or install the skills directly for command-line
+discovery with `npx skills add`.
 
 ## What Is Included
 
@@ -201,7 +203,7 @@ task needs a maintainable app architecture rather than only a package directory.
 The skill covers:
 
 - `apps/web`, `apps/server`, and `packages/shared` monorepo boundaries.
-- `@tutti-os/agent-acp-kit` local Codex/Claude runtime integration.
+- `@tutti-os/agent-acp-kit` integration with the current open local Agent catalog.
 - Run-scoped MCP/tool gateway patterns.
 - Tutti CLI/reference surfaces for external agents and other apps.
 - App-owned `scripts/package-tutti-app.mjs` package builders.
